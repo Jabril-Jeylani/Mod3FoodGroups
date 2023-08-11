@@ -1,9 +1,13 @@
 // Bring in our fruit data
 const fruits = require('../models/fruits')
 
+const Fruit = require('../models/Fruit')
+
 // GET /fruits
-module.exports.index = (req, res) => {
-    res.render('fruits/Index', { fruits })
+module.exports.index = async (req, res) => {
+    const databaseFruits = await Fruit.find()
+    console.log(databaseFruits)
+    res.render('fruits/Index', { fruits: databaseFruits })
 }
 
 //  GET /fruits/:indexOfFruits
@@ -27,15 +31,22 @@ module.exports.edit = (req, res) => {
 }
 
 // POST /fruits
-module.exports.create = (req, res) => {
+module.exports.create = async (req, res) => {
     console.log('POST /fruits')
     console.log(req.body) // <-- should contain form data
+
+
     if (req.body.readyToEat === 'on') {
         req.body.readyToEat = true
     } else {
         req.body.readyToEat = false
     }
-    fruits.push(req.body)
+    try{
+        const newFruit = await Fruit.create(req.body)
+        console.log(newFruit)
+    }catch(err) {
+        console.log('mongoCreateError: ', err)
+    }
     res.redirect('/fruits')
 }
 
