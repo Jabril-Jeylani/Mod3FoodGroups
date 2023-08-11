@@ -1,9 +1,14 @@
 const express = require('express')
 
+require('dotenv').config()
+
+const mongoConfig = require('./config')
+
 const app = express()
 
 const PORT = 8081
 
+mongoConfig()
 // Bring in our routes
 const fruitRoutes = require('./routes/fruitRoutes')
 const vegetableRoutes = require('./routes/vegetableRoutes')
@@ -38,5 +43,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log('Listening on port: ' + PORT)
+    console.log('Listening on port: ' + PORT, process.env.MONGO_URL)
 })
