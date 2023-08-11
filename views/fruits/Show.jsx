@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Show({ fruit, index }) {
-	let { name, color, readyToEat } = fruit;
+	let { name, color, readyToEat, _id } = fruit;
 	return (
 		<div>
 			<h1>Show</h1>
@@ -15,7 +15,7 @@ export default function Show({ fruit, index }) {
 			<br />
 
 			<form
-				action={`/fruits/${index}?_method=DELETE`}
+				action={`/fruits/${_id}?_method=DELETE`}
 				method="POST"
 			>
 				<button>Remove</button>
@@ -23,7 +23,7 @@ export default function Show({ fruit, index }) {
 			<a href="/fruits">
 				<button>Go Back</button>
 			</a>
-			<a href={`/fruits/${index}/edit`}>
+			<a href={`/fruits/${_id}/edit`}>
 				<button>Edit</button>
 			</a>
 		</div>

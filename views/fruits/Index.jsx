@@ -14,7 +14,7 @@ function Index(props) {
 			</ul>
 			{props.fruits.map((fruit, i) => (
 				<a
-					href={`/fruits/${i}`}
+					href={`/fruits/${fruit._id}`}
 					key={i}
 				>
 					{fruit.name}
